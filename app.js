@@ -12,6 +12,16 @@ document.addEventListener('DOMContentLoaded', ()=> {
             squares.push(square)
             console.log(squares)
         }
+        generate()
+        generate()
     }
     createBoard()
+
+    function generate() {
+        const randomNumber = Math.floor(Math.random() * squares.length)
+        console.log(randomNumber)
+        if (squares[randomNumber].innerHTML === "0") {
+            squares[randomNumber].innerHTML = "2"
+        } else generate()
+    }
 })
