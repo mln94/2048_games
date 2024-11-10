@@ -41,6 +41,10 @@ document.addEventListener('DOMContentLoaded', ()=> {
                 let zeros = Array(zeroMissing).fill(0)
                 let newRow = zeros.concat(filteredRow)
                 console.log(newRow)
+                squares[i].innerHTML = newRow[0]
+                squares[i+1].innerHTML = newRow[1]
+                squares[i+2].innerHTML = newRow[2]
+                squares[i+3].innerHTML = newRow[3]
             }
         }
     }
