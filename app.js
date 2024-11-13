@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', ()=> {
     const gridDisplay = document.querySelector('.grid')
+    const scoreDisplay = document.querySelector('#score')
     const width = 4
     const squares = []
+    let score = 0
 
     // creating the playing board
     function createBoard() {
@@ -40,7 +42,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
                 let zeroMissing = 4 - filteredRow.length
                 let zeros = Array(zeroMissing).fill(0)
                 let newRow = zeros.concat(filteredRow)
-                console.log(newRow)
+                // console.log(newRow)
                 squares[i].innerHTML = newRow[0]
                 squares[i+1].innerHTML = newRow[1]
                 squares[i+2].innerHTML = newRow[2]
@@ -48,5 +50,39 @@ document.addEventListener('DOMContentLoaded', ()=> {
             }
         }
     }
-    moveRight()
+
+    //combine rows
+    function combineRow() {
+        for(let i = 0; i < 15; i++) {
+            console.log(squares[i+1])
+            if (squares[i].innerHTML === squares[i+1].innerHTML) {
+                let combinedTotal = parseInt(squares[i].innerHTML) + parseInt(squares[i+1].innerHTML)
+                squares[i].innerHTML = combinedTotal
+                squares[i+1].innerHTML = 0
+                score+=combinedTotal
+                scoreDisplay.innerHTML = score
+            }
+        }
+    }
+
+
+    //assign functions to keys
+    function control(e) {
+        console.log('re')
+        if (e.key === "ArrowLeft") {
+            // keyLeft()
+        } else if(e.key === 'ArrowRight') {
+            keyRight()
+        }
+    }
+
+    document.addEventListener('keydown', control)
+
+    function keyRight() {
+        moveRight()
+        combineRow()
+        moveRight()
+        generate()
+    }
+
 })
