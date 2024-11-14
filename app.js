@@ -29,20 +29,41 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
     // move the number to the right
     function moveRight() {
-        for(let i=0; i < 16; i++) {
+        for(let i=0; i < 15; i++) {
             if(i % 4 === 0) {
                 let totalOne = squares[i].innerHTML
                 let totalTwo = squares[i+1].innerHTML
                 let totalThree = squares[i+2].innerHTML
                 let totalFour = squares[i+3].innerHTML
                 const row = [parseInt(totalOne),parseInt(totalTwo),parseInt(totalThree),parseInt(totalFour)]
-                // console.log(row)
+                console.log(row)
                 let filteredRow = row.filter(num => num)
                 // console.log(filteredRow)
                 let zeroMissing = 4 - filteredRow.length
                 let zeros = Array(zeroMissing).fill(0)
                 let newRow = zeros.concat(filteredRow)
                 // console.log(newRow)
+                squares[i].innerHTML = newRow[0]
+                squares[i+1].innerHTML = newRow[1]
+                squares[i+2].innerHTML = newRow[2]
+                squares[i+3].innerHTML = newRow[3]
+            }
+        }
+    }
+
+    function moveLeft() {
+        for(let i = 0; i < 15; i++) {
+            if(i % 4 === 0) {
+                let totalOne = squares[i].innerHTML
+                let totalTwo = squares[i+1].innerHTML
+                let totalThree = squares[i+2].innerHTML
+                let totalFour = squares[i+3].innerHTML
+                let row = [parseInt(totalOne),parseInt(totalTwo),parseInt(totalThree),parseInt(totalFour)]
+                // console.log(row)
+                let filteredRow = row.filter(num => num)
+                let zeroMissing = 4 - filteredRow.length
+                let zeros = Array(zeroMissing).fill(0)
+                let newRow = filteredRow.concat(zeros)
                 squares[i].innerHTML = newRow[0]
                 squares[i+1].innerHTML = newRow[1]
                 squares[i+2].innerHTML = newRow[2]
@@ -65,12 +86,11 @@ document.addEventListener('DOMContentLoaded', ()=> {
         }
     }
 
-
     //assign functions to keys
     function control(e) {
         console.log('re')
         if (e.key === "ArrowLeft") {
-            // keyLeft()
+            keyLeft()
         } else if(e.key === 'ArrowRight') {
             keyRight()
         }
@@ -82,6 +102,13 @@ document.addEventListener('DOMContentLoaded', ()=> {
         moveRight()
         combineRow()
         moveRight()
+        generate()
+    }
+
+    function keyLeft() {
+        moveLeft()
+        combineRow()
+        moveLeft()
         generate()
     }
 
