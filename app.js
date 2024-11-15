@@ -198,4 +198,17 @@ document.addEventListener('DOMContentLoaded', ()=> {
         }
     }
 
+    function checkForGameOver() {
+        for(let i = 0; i < squares.length; i++) {
+            let zeros = 0
+            if(squares[i].innerHTML == 0){
+                zeros++
+            }
+        }
+        if(zeros === 0){
+            resultDisplay.innerHTML = 'You lose!'
+            document.removeEventListener(keyDown, control)
+        }
+    }
+
 })
